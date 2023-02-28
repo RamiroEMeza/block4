@@ -16,7 +16,7 @@
 		<carina-core_version>8.0.4</carina-core_version>
 		<carina-aws-s3.version>1.0.0</carina-aws-s3.version>
 		<java.version>11</java.version>
-		<zebrunner-agent.version>1.9.2</zebrunner-agent.version>
+<!--		<zebrunner-agent.version>1.9.2</zebrunner-agent.version>-->
 		<suite>helloWorld</suite>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
@@ -149,17 +149,17 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<artifactItems>
-						<artifactItem>
-							<groupId>com.zebrunner</groupId>
-							<artifactId>agent-core</artifactId>
-							<version>${zebrunner-agent.version}</version>
-							<outputDirectory>${project.build.directory}/agent</outputDirectory>
-							<destFileName>zebrunner-agent.jar</destFileName>
-						</artifactItem>
-					</artifactItems>
-				</configuration>
+<!--				<configuration>-->
+<!--					<artifactItems>-->
+<!--						<artifactItem>-->
+<!--							<groupId>com.zebrunner</groupId>-->
+<!--							<artifactId>agent-core</artifactId>-->
+<!--							<version>${zebrunner-agent.version}</version>-->
+<!--							<outputDirectory>${project.build.directory}/agent</outputDirectory>-->
+<!--							<destFileName>zebrunner-agent.jar</destFileName>-->
+<!--						</artifactItem>-->
+<!--					</artifactItems>-->
+<!--				</configuration>-->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

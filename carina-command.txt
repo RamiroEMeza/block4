@@ -1,0 +1,1 @@
+mvn archetype:generate -DarchetypeGroupId=com.qaprosoft -DarchetypeArtifactId=carina-archetype -DarchetypeVersion=RELEASE -DgroupId=com.solvdlaba -DartifactId=api-automation -Dname="Test Automation Project" -Durl=http://mycompany.com -Dversion=1.0
