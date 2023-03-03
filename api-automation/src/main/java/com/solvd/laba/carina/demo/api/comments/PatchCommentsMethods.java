@@ -12,7 +12,5 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 @ResponseTemplatePath(path = "api/comments/_patch/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class PatchCommentsMethods extends AbstractApiMethodV2{
-    public PatchCommentsMethods() {
-        setProperties("api/comments/comments.properties");
-    }
+
 }

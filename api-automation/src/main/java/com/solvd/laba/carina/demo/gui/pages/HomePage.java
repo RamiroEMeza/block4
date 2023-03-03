@@ -28,14 +28,25 @@ public class HomePage extends AbstractPage {
     @FindBy(className = "news-column-index")
     private ExtendedWebElement newsColumn;
 
+    @FindBy(xpath = "//input[@class='gLFyf']")
+    private ExtendedWebElement searchInput; //gNO89b
+
+    @FindBy(xpath = "//input[@class='gNO89b']")
+    private ExtendedWebElement buttonToSearch;
+
     public HomePage(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(newsColumn);
+        setUiLoadedMarker(searchInput);
         setPageAbsoluteURL(R.CONFIG.get(Configuration.Parameter.URL.getKey()));
     }
 
     public FooterMenu getFooterMenu() {
         return footerMenu;
+    }
+
+    public void search(String subject){
+        this.searchInput.type(subject);
+        this.buttonToSearch.click();
     }
 
     public BrandModelsPage selectBrand(String brand) {
