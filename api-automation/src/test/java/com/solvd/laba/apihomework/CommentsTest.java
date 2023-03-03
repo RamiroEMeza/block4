@@ -51,6 +51,7 @@ public class CommentsTest implements IAbstractTest {
         api.getProperties().remove("postId");
         api.callAPIExpectSuccess();
         api.validateResponse();
+        api.validateResponseAgainstSchema("api/comments/_post/rs.schema");
     }
 
     @Test
