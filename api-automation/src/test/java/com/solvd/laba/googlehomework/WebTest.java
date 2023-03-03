@@ -2,6 +2,7 @@ package com.solvd.laba.googlehomework;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.solvd.laba.carina.demo.gui.components.FooterMenu;
+import com.solvd.laba.carina.demo.gui.components.NewsItem;
 import com.solvd.laba.carina.demo.gui.components.compare.ModelSpecs;
 import com.solvd.laba.carina.demo.gui.components.compare.ModelSpecs.SpecType;
 import com.solvd.laba.carina.demo.gui.pages.*;
@@ -9,6 +10,8 @@ import com.zebrunner.agent.core.annotation.TestLabel;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.core.registrar.tag.Priority;
 import com.zebrunner.carina.core.registrar.tag.TestPriority;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -64,11 +67,15 @@ public class WebTest implements IAbstractTest {
     @Test()
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testGoToYoutube(){
+    public void testSearchAndChangePage(){
         Google google = new Google(getDriver());
         google.open();
         Assert.assertTrue(google.isPageOpened(), "Home page is not opened!");
-        google.goYoutube();
+        final String searchQ = "Never gonna give you up";
+        google.search(searchQ);
+
+        WebElement secondPage = google.getDriver().findElement(By.xpath("//a[@class='fl']"));
+        secondPage.click();
     }
 
 }

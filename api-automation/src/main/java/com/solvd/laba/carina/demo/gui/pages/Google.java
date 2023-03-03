@@ -2,6 +2,7 @@ package com.solvd.laba.carina.demo.gui.pages;
 
 import java.lang.invoke.MethodHandles;
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.zebrunner.carina.utils.Configuration;
@@ -35,6 +36,9 @@ public class Google extends AbstractPage {
     @FindBy(xpath = "//a[@class='gb_e']")
     private ExtendedWebElement googleApps;
 
+    @FindBy(xpath = "//a[@class='f1']")
+    private List<ExtendedWebElement> pages;
+
     public Google(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(searchInput);
@@ -60,5 +64,13 @@ public class Google extends AbstractPage {
 
     public WeValuePrivacyAd getWeValuePrivacyAd() {
         return new WeValuePrivacyAd(driver);
+    }
+
+    public ExtendedWebElement getGoogleApps() {
+        return googleApps;
+    }
+
+    public List<ExtendedWebElement> getPages() {
+        return pages;
     }
 }
