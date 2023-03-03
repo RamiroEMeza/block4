@@ -27,17 +27,20 @@ public class Google extends AbstractPage {
     @FindBy(xpath = "//input[@class='gLFyf']")
     private ExtendedWebElement searchInput;
 
-    @FindBy(xpath = "//input[@class='gNO89b']")//RNmpXc
+    @FindBy(xpath = "//input[@class='gNO89b']")
     private ExtendedWebElement buttonToSearch;//
 
     @FindBy(xpath = "//input[@class='RNmpXc']")
-    private ExtendedWebElement buttonToIFeelingLucky;//
+    private ExtendedWebElement buttonToIFeelingLucky;
 
     @FindBy(xpath = "//a[@class='gb_e']")
     private ExtendedWebElement googleApps;
 
     @FindBy(xpath = "//a[@class='f1']")
     private List<ExtendedWebElement> pages;
+
+    @FindBy(xpath = "//a[@class='pHiOh']")
+    private ExtendedWebElement aboutGoogle;
 
     public Google(WebDriver driver) {
         super(driver);
@@ -72,5 +75,9 @@ public class Google extends AbstractPage {
 
     public List<ExtendedWebElement> getPages() {
         return pages;
+    }
+
+    public ExtendedWebElement getAboutGoogle() {
+        return aboutGoogle;
     }
 }

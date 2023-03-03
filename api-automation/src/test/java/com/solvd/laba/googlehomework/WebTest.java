@@ -78,4 +78,19 @@ public class WebTest implements IAbstractTest {
         secondPage.click();
     }
 
+
+    @Test()
+    @MethodOwner(owner = "qpsdemo")
+    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    public void testGoToProducts(){
+        Google google = new Google(getDriver());
+        google.open();
+        Assert.assertTrue(google.isPageOpened(), "Home page is not opened!");
+        google.getAboutGoogle().click();//glue-header__link
+
+        List<WebElement> menu = google.getDriver().findElements(By.xpath("//a[@class='glue-header__link']"));
+        menu.get(1).click();
+
+    }
+
 }
