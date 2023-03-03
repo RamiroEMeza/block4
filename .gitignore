@@ -27,7 +27,7 @@ hs_err_pid*
 # Generated Files #
 target/
 out/
-
+reports/
 .idea/
 researchFileCopy.json
 equipmentsM.xml
