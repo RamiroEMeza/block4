@@ -89,8 +89,12 @@ public class WebTest implements IAbstractTest {
         google.getAboutGoogle().click();//glue-header__link
 
         List<WebElement> menu = google.getDriver().findElements(By.xpath("//a[@class='glue-header__link']"));
-        menu.get(1).click();
-
+        for (WebElement element: menu) {
+            if (element.getText().contains("Produc")) {
+                element.click();
+                break;
+            }
+        }
     }
 
 }
