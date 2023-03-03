@@ -38,7 +38,7 @@ public class CommentsTest implements IAbstractTest {
         LOGGER.info("TEST POST COMMENT");
         setCases("48659652");
         PostCommentsMethods api = new PostCommentsMethods();
-        api.callAPI();
+        api.callAPIExpectSuccess();
         api.validateResponse();
     }
 

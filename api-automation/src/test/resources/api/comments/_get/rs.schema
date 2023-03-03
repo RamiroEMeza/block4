@@ -1,24 +1,26 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "postId": {
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "postId": {
           "type": "integer"
-      },
-      "id": {
+        },
+        "id": {
           "type": "integer"
-      },
-      "name": {
+        },
+        "name": {
           "type": "string"
-      },
-      "email": {
+        },
+        "email": {
           "type": "string"
-      },
-      "body": {
+        },
+        "body": {
           "type": "string"
+        }
       }
     }
-  }
+  ]
 }
