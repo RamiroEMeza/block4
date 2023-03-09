@@ -36,10 +36,10 @@ public class CommentsTest implements IAbstractTest {
     @MethodOwner(owner = "qpsdemo")
     public void testCreateComments() throws Exception {
         LOGGER.info("TEST POST COMMENT");
-        setCases("48659652");
         PostCommentsMethods api = new PostCommentsMethods();
         api.callAPIExpectSuccess();
         api.validateResponse();
+        api.validateResponseAgainstSchema("api/comments/_post/rs.schema");
     }
 
     @Test()
@@ -57,7 +57,6 @@ public class CommentsTest implements IAbstractTest {
     @Test
     public void testPatchComments() {
         LOGGER.info("TEST PATCH COMMENT");
-        setCases("48659652");
         PostCommentsMethods api = new PostCommentsMethods();
         Response r = api.callAPIExpectSuccess();
         api.validateResponse();
