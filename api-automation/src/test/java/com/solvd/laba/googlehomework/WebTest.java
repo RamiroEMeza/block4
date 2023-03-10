@@ -1,7 +1,10 @@
 package com.solvd.laba.googlehomework;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.solvd.laba.carina.demo.gui.pages.*;
+import com.solvd.laba.carina.demo.gui.pages.homework.Google;
+import com.solvd.laba.carina.demo.gui.pages.homework.InfoPage;
+import com.solvd.laba.carina.demo.gui.pages.homework.ProductPage;
+import com.solvd.laba.carina.demo.gui.pages.homework.SearchResultPage;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.utils.R;
@@ -44,7 +47,38 @@ public class WebTest implements IAbstractTest {
         Google google = new Google(getDriver());
         google.open();
         Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
-        google.search(R.TESTDATA.get("search_example_one"));
+        SearchResultPage secondPage = google.search(R.TESTDATA.get("search_example_one"));
+        Assert.assertTrue(secondPage.isPageOpened(), R.TESTDATA.get("not_opened"));
+        secondPage.checkSearch(R.TESTDATA.get("search_example_one"));
+        secondPage.search(R.TESTDATA.get("search_example_two"));
+    }
+
+    @Test()
+    @MethodOwner(owner = "qpsdemo")
+    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    public void testSearchAndChangePage(){
+        Google google = new Google(getDriver());
+        google.open();
+        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
+
+
+        SearchResultPage secondPage = google.search(R.TESTDATA.get("search_example_one"));
+        Assert.assertTrue(secondPage.isPageOpened(), R.TESTDATA.get("not_opened"));
+        secondPage.checkSearch(R.TESTDATA.get("search_example_one"));
+        secondPage.changePage(2);
+    }
+
+    @Test()
+    @MethodOwner(owner = "qpsdemo")
+    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    public void testGoToProducts(){
+        Google google = new Google(getDriver());
+        google.open();
+        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
+        InfoPage infoPage = google.getAboutGoogle();//glue-header__link
+        Assert.assertTrue(infoPage.isPageOpened(), R.TESTDATA.get("not_opened"));
+        ProductPage productPage = infoPage.goToProduct();
+        Assert.assertTrue(productPage.isPageOpened(), R.TESTDATA.get("not_opened"));
     }
 
     @Test()
@@ -55,38 +89,6 @@ public class WebTest implements IAbstractTest {
         google.open();
         Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
         google.luckySearch(R.TESTDATA.get("search_example_one"));
-    }
-
-    @Test()
-    @MethodOwner(owner = "qpsdemo")
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testSearchAndChangePage(){
-        Google google = new Google(getDriver());
-        google.open();
-        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
-        google.search(R.TESTDATA.get("search_example_one"));
-
-        WebElement secondPage = google.getDriver().findElement(By.xpath("//a[@class='fl']"));
-        secondPage.click();
-    }
-
-
-    @Test()
-    @MethodOwner(owner = "qpsdemo")
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testGoToProducts(){
-        Google google = new Google(getDriver());
-        google.open();
-        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
-        google.getAboutGoogle().click();//glue-header__link
-
-        List<WebElement> menu = google.getDriver().findElements(By.xpath("//a[@class='glue-header__link']"));
-        for (WebElement element: menu) {
-            if (element.getText().contains(R.TESTDATA.get("products_section"))) {
-                element.click();
-                break;
-            }
-        }
     }
 
 }

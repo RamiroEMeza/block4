@@ -1,17 +1,16 @@
-package com.solvd.laba.carina.demo.gui.pages;
+package com.solvd.laba.carina.demo.gui.pages.homework;
 
 import java.lang.invoke.MethodHandles;
 import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.utils.Configuration;
 import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,38 +23,31 @@ import com.solvd.laba.carina.demo.gui.components.WeValuePrivacyAd;
 public class Google extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @FindBy(xpath = "//input[@name='q']")
-    private ExtendedWebElement searchInput;
-
-    @FindBy(xpath = "//input[@name='btnK']")
-    private ExtendedWebElement buttonToSearch;//
-
-    @FindBy(xpath = "//input[@name='btnI']")
-    private ExtendedWebElement buttonToIFeelingLucky;
+    @FindBy(xpath = "//form[@action='/search']")
+    private ExtendedWebElement searchForm;
 
     @FindBy(xpath = "//a[@class='gb_e']")
     private ExtendedWebElement googleApps;
-
-    @FindBy(xpath = "//a[@class='f1']")
-    private List<ExtendedWebElement> pages;
 
     @FindBy(xpath = "//a[@class='pHiOh']")
     private ExtendedWebElement aboutGoogle;
 
     public Google(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(searchInput);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setUiLoadedMarker(searchForm);
         setPageAbsoluteURL(R.CONFIG.get(Configuration.Parameter.URL.getKey()));
     }
 
-    public void search(String subject){
-        this.searchInput.type(subject);
-        this.buttonToSearch.click();
+    public SearchResultPage search(String subject){
+        searchForm.findExtendedWebElement(By.name("q")).type(subject);
+        searchForm.findExtendedWebElement(By.name("btnK")).click();
+        return new SearchResultPage(driver);
     }
 
     public void luckySearch(String subject){
-        this.searchInput.type(subject);
-        this.buttonToIFeelingLucky.click();
+        searchForm.findExtendedWebElement(By.name("q")).type(subject);
+        searchForm.findExtendedWebElement(By.name("btnI")).click();
     }
 
     public void goYoutube() {
@@ -73,11 +65,8 @@ public class Google extends AbstractPage {
         return googleApps;
     }
 
-    public List<ExtendedWebElement> getPages() {
-        return pages;
-    }
-
-    public ExtendedWebElement getAboutGoogle() {
-        return aboutGoogle;
+    public InfoPage getAboutGoogle() {
+        aboutGoogle.click();
+        return new InfoPage(driver);
     }
 }
