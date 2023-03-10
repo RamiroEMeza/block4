@@ -24,13 +24,13 @@ import com.solvd.laba.carina.demo.gui.components.WeValuePrivacyAd;
 public class Google extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @FindBy(xpath = "//input[@class='gLFyf']")
+    @FindBy(xpath = "//input[@name='q']")
     private ExtendedWebElement searchInput;
 
-    @FindBy(xpath = "//input[@class='gNO89b']")
+    @FindBy(xpath = "//input[@name='btnK']")
     private ExtendedWebElement buttonToSearch;//
 
-    @FindBy(xpath = "//input[@class='RNmpXc']")
+    @FindBy(xpath = "//input[@name='btnI']")
     private ExtendedWebElement buttonToIFeelingLucky;
 
     @FindBy(xpath = "//a[@class='gb_e']")

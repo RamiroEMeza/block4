@@ -1,0 +1,40 @@
+1. Move all website related data into testdata.properties
+2. Fill the form with one method processing all inputs within
+3. Don't use generated data in your locators
+/*
+ * 1. id/name
+ * 2. css
+ * 3. xpath (+ works with text; + supports axes) "text()='some text'" "contains(text(), 'text')"
+ * 4. linkText
+ */
+ 4. Store basic url part in config.properties
+ 5. Add verification of page opening into your tests (you may change the strategy per https://zebrunner.github.io/carina/automation/web/#page-opening-strategy)
+ 6. Don't work with locators directly in your test methods; don't work with pure selenium WebElement
+7. All your tests should include validation part
+
+1. @Test and @BeforeMethod can't be put on the same method
+2. Remove checkoutComplete.clickBackHome(); from createOrderTest()
+3. Always put description message to Assert.method() methods
+4. Create Facebook page and use it for validation
+5. Find out if you need driver.close() in testFooterLinks
+6. Re-factor problematic user scenario
+7. Re-factor testItems(): replace clickBackpack() by selectItem(name); implement List of product items (custom AbstractUIObject); add validation of item page contents (to make sure that proper item was selected)
+8. setUiLoadedMarker() can set only SINGLE element as page loading marker.
+9. Don't return ExtendedWebElement out of the test (getErrorButton() method). Instead make all the logic with elements (including assertions) directly on page/component level
+
+
+1. combine some tests to make them more complex. it's not okay to have only single action/check in the test
+2. Always use timeouts in isElementPresent(), assertElementPresent()
+3. Use scrollTo() from ExtWebElement to scroll to element
+4. Extend some scenarion (e.g. testGoToSportsPage) and add some more. Implement at least one test for searching functionality
+5. Use list of AbstractUIObject somewhere in your tests
+
+
+1. Re-factor common methods usage (with implementation of service classes)
+2. Always put description message to Assert.method() methods
+3. Fix isBlockedText(). change name; never compare web elements with nulls. they're always not null
+4. Don't use findElement() on the page. follow page object pattern instead
+5. Don't overload the page with unused methods. Don't return ExtWebElements out of the page/component
+6. Use carina's pause() with seconds if you need to wait for some time
+7. Replace working with IDs when you process the products by working with item titles.
+8. Unify isPageOpened() or assertPageOpened() usage

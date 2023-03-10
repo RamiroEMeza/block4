@@ -1,15 +1,10 @@
 package com.solvd.laba.googlehomework;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.solvd.laba.carina.demo.gui.components.FooterMenu;
-import com.solvd.laba.carina.demo.gui.components.NewsItem;
-import com.solvd.laba.carina.demo.gui.components.compare.ModelSpecs;
-import com.solvd.laba.carina.demo.gui.components.compare.ModelSpecs.SpecType;
 import com.solvd.laba.carina.demo.gui.pages.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
-import com.zebrunner.carina.core.registrar.tag.Priority;
-import com.zebrunner.carina.core.registrar.tag.TestPriority;
+import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
@@ -35,10 +30,10 @@ public class WebTest implements IAbstractTest {
     public void testDesktopWidth() {
         Google google = new Google(getDriver());
         google.open();
-        Assert.assertTrue(google.isPageOpened(), "Home page is not opened!");
+        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(String.valueOf(google.getDevice().getDeviceType()), "DESKTOP");
-        softAssert.assertEquals(String.valueOf(getDriver().manage().window().getSize().getWidth()>=1024), "true");
+        softAssert.assertEquals(String.valueOf(google.getDevice().getDeviceType()), R.TESTDATA.get("desktop"));
+        softAssert.assertEquals(String.valueOf(getDriver().manage().window().getSize().getWidth()>=R.TESTDATA.getInt("desktop_with")), "true");
         softAssert.assertAll();
     }
     
@@ -48,9 +43,8 @@ public class WebTest implements IAbstractTest {
     public void testSearch() {
         Google google = new Google(getDriver());
         google.open();
-        Assert.assertTrue(google.isPageOpened(), "Home page is not opened!");
-        final String searchQ = "Never gonna give you up";
-        google.search(searchQ);
+        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
+        google.search(R.TESTDATA.get("search_example_one"));
     }
 
     @Test()
@@ -59,9 +53,8 @@ public class WebTest implements IAbstractTest {
     public void testLuckySearch() {
         Google google = new Google(getDriver());
         google.open();
-        Assert.assertTrue(google.isPageOpened(), "Home page is not opened!");
-        final String searchQ = "Never gonna give you up";
-        google.luckySearch(searchQ);
+        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
+        google.luckySearch(R.TESTDATA.get("search_example_one"));
     }
 
     @Test()
@@ -70,9 +63,8 @@ public class WebTest implements IAbstractTest {
     public void testSearchAndChangePage(){
         Google google = new Google(getDriver());
         google.open();
-        Assert.assertTrue(google.isPageOpened(), "Home page is not opened!");
-        final String searchQ = "Never gonna give you up";
-        google.search(searchQ);
+        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
+        google.search(R.TESTDATA.get("search_example_one"));
 
         WebElement secondPage = google.getDriver().findElement(By.xpath("//a[@class='fl']"));
         secondPage.click();
@@ -85,12 +77,12 @@ public class WebTest implements IAbstractTest {
     public void testGoToProducts(){
         Google google = new Google(getDriver());
         google.open();
-        Assert.assertTrue(google.isPageOpened(), "Home page is not opened!");
+        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
         google.getAboutGoogle().click();//glue-header__link
 
         List<WebElement> menu = google.getDriver().findElements(By.xpath("//a[@class='glue-header__link']"));
         for (WebElement element: menu) {
-            if (element.getText().contains("Produc")) {
+            if (element.getText().contains(R.TESTDATA.get("products_section"))) {
                 element.click();
                 break;
             }
