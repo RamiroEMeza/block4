@@ -39,7 +39,7 @@ public class SearchResultPage extends AbstractPage {
     @FindBy(xpath = "//a[@class='f1']")
     private List<ExtendedWebElement> pages;
 
-    @FindBy(xpath="//div[@id='rcnt']//div//a/h3")
+    @FindBy(xpath="//div[@id='rcnt']//div//a[not(ancestor::div[@class='g'])]/h3")
     private List<ExtendedWebElement> titlesResults;
 
     @FindBy(xpath="//div[@id='rcnt']//div/span//em")
@@ -63,28 +63,28 @@ public class SearchResultPage extends AbstractPage {
     public void checkSearch(String subject){
         Assert.assertFalse(titlesResults.isEmpty());
         Assert.assertFalse(descriptionResults.isEmpty());
-        LOGGER.info("TITLES " + titlesResults.size());
-        titlesResults.forEach(t -> {
-            LOGGER.info(titlesResults.indexOf(t)+ " text = " + t.getText());
-        });
-        LOGGER.info("DESCRIPTIONS " + descriptionResults.size());
-        descriptionResults.forEach(d -> {
-            LOGGER.info(descriptionResults.indexOf(d)+ " text = " + d.getText());
-        });
-//        AtomicInteger titlesAppearances = new AtomicInteger();
-//        AtomicInteger descriptionAppearances = new AtomicInteger();
+//        LOGGER.info("TITLES " + titlesResults.size());
 //        titlesResults.forEach(t -> {
-//            if (StringUtils.containsIgnoreCase(t.getText(), subject)){
-//                titlesAppearances.getAndIncrement();
-//            }
+//            LOGGER.info(titlesResults.indexOf(t)+ " text = " + t.getText());
 //        });
+//        LOGGER.info("DESCRIPTIONS " + descriptionResults.size());
 //        descriptionResults.forEach(d -> {
-//            if (StringUtils.containsIgnoreCase(d.getText(), subject)){
-//                descriptionAppearances.getAndIncrement();
-//            }
+//            LOGGER.info(descriptionResults.indexOf(d)+ " text = " + d.getText());
 //        });
-//        Assert.assertTrue(titlesAppearances.get()>0);
-//        Assert.assertTrue(descriptionAppearances.get()>0);
+        AtomicInteger titlesAppearances = new AtomicInteger();
+        AtomicInteger descriptionAppearances = new AtomicInteger();
+        titlesResults.forEach(t -> {
+            if (t.isElementPresent() && t.isVisible() &&StringUtils.containsIgnoreCase(t.getText(), subject)){
+                titlesAppearances.getAndIncrement();
+            }
+        });
+        descriptionResults.forEach(d -> {
+            if (d.isElementPresent() && d.isVisible() && StringUtils.containsIgnoreCase(d.getText(), subject)){
+                descriptionAppearances.getAndIncrement();
+            }
+        });
+        Assert.assertTrue(titlesAppearances.get()>0);
+        Assert.assertTrue(descriptionAppearances.get()>0);
     }
 
     public void changePage(int i) {
