@@ -79,6 +79,7 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(infoPage.isPageOpened(), R.TESTDATA.get("not_opened"));
         ProductPage productPage = infoPage.goToProduct();
         Assert.assertTrue(productPage.isPageOpened(), R.TESTDATA.get("not_opened"));
+        productPage.checkGoogleProductsList();
     }
 
     @Test()
