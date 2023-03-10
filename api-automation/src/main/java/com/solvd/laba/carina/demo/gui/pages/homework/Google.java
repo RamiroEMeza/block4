@@ -23,10 +23,10 @@ public class Google extends AbstractPage {
     @FindBy(xpath = "//input[@name='q']")
     private ExtendedWebElement searchInput;
 
-    @FindBy(xpath = "//button[@name='btnK']")
+    @FindBy(xpath = "//input[@name='btnK' and @role='button']")
     private ExtendedWebElement searchButton;
 
-    @FindBy(xpath = "//form[@action='/search']//div[@role='button' and (@aria-label='Borrar' or @aria-label='Delete')]")
+    @FindBy(xpath = "//form/div/div/div/center/input[@name='btnK' and @role='button']")
     private ExtendedWebElement clearSearchinput;
 
     @FindBy(xpath = "//a[@class='gb_e']")

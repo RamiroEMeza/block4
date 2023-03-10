@@ -57,10 +57,14 @@ public class WebTest implements IAbstractTest {
         Google google = new Google(getDriver());
         google.open();
         Assert.assertTrue(google.isPageOpened(), "Page is not opened!");
+
         SearchResultPage secondPage = google.search(R.TESTDATA.get("search_example_one"));
         Assert.assertTrue(secondPage.isPageOpened(), "Page is not opened!");
         secondPage.checkSearch(R.TESTDATA.get("search_example_one"));
+
         SearchResultPage thirdPage =secondPage.search(R.TESTDATA.get("search_example_two"));
+        Assert.assertTrue(thirdPage.isPageOpened(), "Page is not opened!");
+        thirdPage.checkSearch(R.TESTDATA.get("search_example_two"));
     }
 
     @Test()
