@@ -1,9 +1,7 @@
 package com.solvd.laba.carina.demo.gui.pages.homework;
 
 import java.lang.invoke.MethodHandles;
-import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import com.zebrunner.carina.utils.Configuration;
@@ -12,8 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,10 +40,10 @@ public class SearchResultPage extends AbstractPage {
         setPageAbsoluteURL(R.CONFIG.get(Configuration.Parameter.URL.getKey()));
     }
 
-    public void search(String subject){
+    public SearchResultPage search(String subject){
         searchForm.findExtendedWebElement(By.name("q")).type(subject);
         searchForm.findExtendedWebElement(By.tagName("button")).click();
-        checkSearch(subject);
+        return new SearchResultPage(driver);
     }
 
     public void checkSearch(String subject){
@@ -58,17 +54,6 @@ public class SearchResultPage extends AbstractPage {
     public void changePage(int i) {
         Assert.assertTrue(pageNavigation.isElementPresent());
         driver.findElement(By.xpath("//td/a[contains(text(), '"+i+"')]")).click();
-    }
-
-    public void goYoutube() {
-        this.googleApps.click();
-        new WebDriverWait(this.getDriver(), Duration.ofSeconds(2));
-        WebElement youtubeLink = this.getDriver().findElement(By.xpath("//a[@class='tX9u1b']"));
-        youtubeLink.click();
-    }
-
-    public WeValuePrivacyAd getWeValuePrivacyAd() {
-        return new WeValuePrivacyAd(driver);
     }
 
     public ExtendedWebElement getGoogleApps() {

@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.solvd.laba.carina.demo.gui.components.WeValuePrivacyAd;
 import org.testng.Assert;
 
 public class ProductPage extends AbstractPage {
@@ -33,10 +32,6 @@ public class ProductPage extends AbstractPage {
 
     public void checkGoogleProductsList(){
         Assert.assertTrue(googleProducts.isElementPresent());
-    }
-
-    public WeValuePrivacyAd getWeValuePrivacyAd() {
-        return new WeValuePrivacyAd(driver);
     }
 
 }

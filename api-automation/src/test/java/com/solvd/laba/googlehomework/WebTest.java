@@ -33,11 +33,21 @@ public class WebTest implements IAbstractTest {
     public void testDesktopWidth() {
         Google google = new Google(getDriver());
         google.open();
-        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
+        Assert.assertTrue(google.isPageOpened(), "Page is not opened!");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(String.valueOf(google.getDevice().getDeviceType()), R.TESTDATA.get("desktop"));
         softAssert.assertEquals(String.valueOf(getDriver().manage().window().getSize().getWidth()>=R.TESTDATA.getInt("desktop_with")), "true");
         softAssert.assertAll();
+    }
+
+    @Test()
+    @MethodOwner(owner = "qpsdemo")
+    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    public void writeAndClearSearchInput() {
+        Google google = new Google(getDriver());
+        google.open();
+        Assert.assertTrue(google.isPageOpened(), "Page is not opened!");
+        google.writeAndDeleteInput(R.TESTDATA.get("search_example_one"));
     }
     
     @Test()
@@ -46,11 +56,11 @@ public class WebTest implements IAbstractTest {
     public void testSearch() {
         Google google = new Google(getDriver());
         google.open();
-        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
+        Assert.assertTrue(google.isPageOpened(), "Page is not opened!");
         SearchResultPage secondPage = google.search(R.TESTDATA.get("search_example_one"));
-        Assert.assertTrue(secondPage.isPageOpened(), R.TESTDATA.get("not_opened"));
+        Assert.assertTrue(secondPage.isPageOpened(), "Page is not opened!");
         secondPage.checkSearch(R.TESTDATA.get("search_example_one"));
-        secondPage.search(R.TESTDATA.get("search_example_two"));
+        SearchResultPage thirdPage =secondPage.search(R.TESTDATA.get("search_example_two"));
     }
 
     @Test()
@@ -59,11 +69,11 @@ public class WebTest implements IAbstractTest {
     public void testSearchAndChangePage(){
         Google google = new Google(getDriver());
         google.open();
-        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
+        Assert.assertTrue(google.isPageOpened(), "Page is not opened!");
 
 
         SearchResultPage secondPage = google.search(R.TESTDATA.get("search_example_one"));
-        Assert.assertTrue(secondPage.isPageOpened(), R.TESTDATA.get("not_opened"));
+        Assert.assertTrue(secondPage.isPageOpened(), "Page is not opened!");
         secondPage.checkSearch(R.TESTDATA.get("search_example_one"));
         secondPage.changePage(2);
     }
@@ -74,22 +84,12 @@ public class WebTest implements IAbstractTest {
     public void testGoToProducts(){
         Google google = new Google(getDriver());
         google.open();
-        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
+        Assert.assertTrue(google.isPageOpened(), "Page is not opened!");
         InfoPage infoPage = google.getAboutGoogle();//glue-header__link
-        Assert.assertTrue(infoPage.isPageOpened(), R.TESTDATA.get("not_opened"));
+        Assert.assertTrue(infoPage.isPageOpened(), "Page is not opened!");
         ProductPage productPage = infoPage.goToProduct();
-        Assert.assertTrue(productPage.isPageOpened(), R.TESTDATA.get("not_opened"));
+        Assert.assertTrue(productPage.isPageOpened(), "Page is not opened!");
         productPage.checkGoogleProductsList();
-    }
-
-    @Test()
-    @MethodOwner(owner = "qpsdemo")
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testLuckySearch() {
-        Google google = new Google(getDriver());
-        google.open();
-        Assert.assertTrue(google.isPageOpened(), R.TESTDATA.get("not_opened"));
-        google.luckySearch(R.TESTDATA.get("search_example_one"));
     }
 
 }
