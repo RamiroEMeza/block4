@@ -51,12 +51,12 @@ public class SearchResultPage extends AbstractPage {
     }
 
     public void checkSearch(String subject){
-        String s = "//h3[contains(text(), "+subject+")]";
         List<WebElement> resultsLinks = driver.findElements(By.xpath("//h3[contains(text(), '"+subject+"')]"));
         Assert.assertFalse(resultsLinks.isEmpty());
     }
 
     public void changePage(int i) {
+        Assert.assertTrue(pageNavigation.isElementPresent());
         driver.findElement(By.xpath("//td/a[contains(text(), '"+i+"')]")).click();
     }
 
