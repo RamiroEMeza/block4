@@ -10,11 +10,10 @@ import org.slf4j.LoggerFactory;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.solvd.laba.carina.demo.gui.components.WeValuePrivacyAd;
 import org.testng.Assert;
 
 
-public class Google extends AbstractPage {
+public class GoogleHomePage extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @FindBy(xpath = "//form[@action='/search']")
@@ -26,8 +25,8 @@ public class Google extends AbstractPage {
     @FindBy(xpath = "//input[@name='btnK' and @role='button']")
     private ExtendedWebElement searchButton;
 
-    @FindBy(xpath = "//form/div/div/div/center/input[@name='btnK' and @role='button']")
-    private ExtendedWebElement clearSearchinput;
+    @FindBy(xpath = "//form//div[@role='button' and (@aria-label='Delete' or @aria-label='Borrar')]")
+    private ExtendedWebElement clearSearchInput;
 
     @FindBy(xpath = "//a[@class='gb_e']")
     private ExtendedWebElement googleApps;
@@ -35,7 +34,7 @@ public class Google extends AbstractPage {
     @FindBy(xpath = "//a[@class='pHiOh']")
     private ExtendedWebElement aboutGoogle;
 
-    public Google(WebDriver driver) {
+    public GoogleHomePage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(searchForm);
@@ -49,7 +48,7 @@ public class Google extends AbstractPage {
 
     public void writeAndDeleteInput(String subject){
         searchInput.type(subject);
-        clearSearchinput.click();
+        clearSearchInput.click();
         Assert.assertTrue(searchInput.getText().isEmpty());
     }
 
