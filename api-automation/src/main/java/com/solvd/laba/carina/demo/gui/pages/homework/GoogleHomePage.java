@@ -40,14 +40,18 @@ public class GoogleHomePage extends AbstractPage {
         setUiLoadedMarker(searchForm);
     }
 
-    public SearchResultPage search(String subject){
+    public SearchResultPage search(String subject) {
+        assertElementPresent(searchInput);
         searchInput.type(subject);
+        assertElementPresent(searchButton);
         searchButton.click();
         return new SearchResultPage(driver);
     }
 
-    public void writeAndDeleteInput(String subject){
+    public void writeAndDeleteInput(String subject) {
+        assertElementPresent(searchInput);
         searchInput.type(subject);
+        assertElementPresent(clearSearchInput);
         clearSearchInput.click();
         Assert.assertTrue(searchInput.getText().isEmpty());
     }
@@ -57,6 +61,7 @@ public class GoogleHomePage extends AbstractPage {
     }
 
     public InfoPage getAboutGoogle() {
+        assertElementPresent(aboutGoogle);
         aboutGoogle.click();
         return new InfoPage(driver);
     }

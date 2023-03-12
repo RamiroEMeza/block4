@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
-public class InfoPage extends AbstractPage {
+public class StoriesPage extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     @FindBy(xpath = "//header//nav")
     private AboutGoogleNavigation aboutGoogleNavigation;
@@ -20,7 +20,7 @@ public class InfoPage extends AbstractPage {
     @FindBy(xpath = "//header//img")
     private ExtendedWebElement googleLogo;
 
-    public InfoPage(WebDriver driver) {
+    public StoriesPage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
         setUiLoadedMarker(googleLogo);

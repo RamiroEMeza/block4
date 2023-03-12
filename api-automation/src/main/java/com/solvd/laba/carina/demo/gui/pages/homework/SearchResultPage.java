@@ -39,10 +39,10 @@ public class SearchResultPage extends AbstractPage {
     @FindBy(xpath = "//a[@class='f1']")
     private List<ExtendedWebElement> pages;
 
-    @FindBy(xpath="//div[@id='rcnt']//div//a[not(ancestor::div[@class='g'])]/h3")
+    @FindBy(xpath = "//div[@id='rcnt']//div//a[not(ancestor::div[@class='g'])]/h3")
     private List<ExtendedWebElement> titlesResults;
 
-    @FindBy(xpath="//div[@id='rcnt']//div/span//em")
+    @FindBy(xpath = "//div[@id='rcnt']//div/span//em")
     private List<ExtendedWebElement> descriptionResults;
     @FindBy(xpath = "//div[@role='navigation']")
     private ExtendedWebElement pageNavigation;
@@ -54,13 +54,13 @@ public class SearchResultPage extends AbstractPage {
         setPageAbsoluteURL(R.CONFIG.get(Configuration.Parameter.URL.getKey()));
     }
 
-    public SearchResultPage search(String subject){
+    public SearchResultPage search(String subject) {
         searchInput.type(subject);
         searchButton.click();
         return new SearchResultPage(driver);
     }
 
-    public void checkSearch(String subject){
+    public void checkSearch(String subject) {
         Assert.assertFalse(titlesResults.isEmpty());
         Assert.assertFalse(descriptionResults.isEmpty());
 //        LOGGER.info("TITLES " + titlesResults.size());
@@ -74,22 +74,22 @@ public class SearchResultPage extends AbstractPage {
         AtomicInteger titlesAppearances = new AtomicInteger();
         AtomicInteger descriptionAppearances = new AtomicInteger();
         titlesResults.forEach(t -> {
-            if (t.isElementPresent() && t.isVisible() &&StringUtils.containsIgnoreCase(t.getText(), subject)){
+            if (t.isElementPresent() && t.isVisible() && StringUtils.containsIgnoreCase(t.getText(), subject)) {
                 titlesAppearances.getAndIncrement();
             }
         });
         descriptionResults.forEach(d -> {
-            if (d.isElementPresent() && d.isVisible() && StringUtils.containsIgnoreCase(d.getText(), subject)){
+            if (d.isElementPresent() && d.isVisible() && StringUtils.containsIgnoreCase(d.getText(), subject)) {
                 descriptionAppearances.getAndIncrement();
             }
         });
-        Assert.assertTrue(titlesAppearances.get()>0);
-        Assert.assertTrue(descriptionAppearances.get()>0);
+        Assert.assertTrue(titlesAppearances.get() > 0);
+        Assert.assertTrue(descriptionAppearances.get() > 0);
     }
 
     public void changePage(int i) {
         Assert.assertTrue(pageNavigation.isElementPresent());
-        driver.findElement(By.xpath("//td/a[contains(text(), '"+i+"')]")).click();
+        driver.findElement(By.xpath("//td/a[contains(text(), '" + i + "')]")).click();
     }
 
     public ExtendedWebElement getGoogleApps() {
