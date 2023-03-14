@@ -77,14 +77,14 @@ public class WebTest implements IAbstractTest {
         googleHomePage.open();
         Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
 
-        SearchResultPage secondPage = googleHomePage.search(R.TESTDATA.get("search_example_one"));
-        Assert.assertTrue(secondPage.isPageOpened(), "Page is not opened!");
-        secondPage.checkSearch(R.TESTDATA.get("search_example_one"));
+        SearchResultPage firstSearchResults = googleHomePage.search(R.TESTDATA.get("search_example_one"));
+        Assert.assertTrue(firstSearchResults.isPageOpened(), "Page is not opened!");
+        firstSearchResults.checkSearch(R.TESTDATA.get("search_example_one"));
 
-        SearchResultPage anotherPage = secondPage.changePage(R.TESTDATA.get("change_to_result_page"));
-        Assert.assertTrue(anotherPage.isPageOpened(), "Page is not opened!");
-        anotherPage.checkSearch(R.TESTDATA.get("search_example_one"));
-        anotherPage.checkCorrectPageIsOpen(R.TESTDATA.get("change_to_result_page"));
+        SearchResultPage secondSearchResults = firstSearchResults.changePage(R.TESTDATA.get("change_to_result_page"));
+        Assert.assertTrue(secondSearchResults.isPageOpened(), "Page is not opened!");
+        secondSearchResults.checkSearch(R.TESTDATA.get("search_example_one"));
+        secondSearchResults.checkCorrectPageIsOpen(R.TESTDATA.get("change_to_result_page"));
     }
 
     @Test()
