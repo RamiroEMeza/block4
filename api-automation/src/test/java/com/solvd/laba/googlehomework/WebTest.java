@@ -1,13 +1,14 @@
 package com.solvd.laba.googlehomework;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.solvd.laba.carina.demo.gui.pages.homework.*;
+import com.solvd.laba.carina.demo.gui.homework.pages.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -20,6 +21,13 @@ import java.lang.invoke.MethodHandles;
  */
 public class WebTest implements IAbstractTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
+    @DataProvider(name = "CheckInData")
+    public static Object[][] dataprovider() {
+        return new Object[][]{
+                {"testcheckin2023@gmail.com", "chairdesk56"},
+        };
+    }
 
     @Test()
     @MethodOwner(owner = "qpsdemo")
@@ -106,5 +114,21 @@ public class WebTest implements IAbstractTest {
         infoPage = storiesPage.getAboutGoogleNavigation().openInfoPage();
 
     }
+
+    @Test(dataProvider = "CheckInData")
+    @MethodOwner(owner = "qpsdemo")
+    @TestLabel(name = "feature", value = {"web", "acceptance"})
+    public void testCheckIn(String email, String password) {
+        GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
+        googleHomePage.open();
+        Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
+
+        SignInStepOnePage signInStepOnePage = googleHomePage.goToSignIn();
+
+        signInStepOnePage.checkIn(email);
+        signInStepOnePage.checkDataProvided(email);
+
+    }
+
 
 }

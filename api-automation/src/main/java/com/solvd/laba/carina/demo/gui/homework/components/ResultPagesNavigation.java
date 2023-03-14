@@ -1,6 +1,6 @@
-package com.solvd.laba.carina.demo.gui.components.homework;
+package com.solvd.laba.carina.demo.gui.homework.components;
 
-import com.solvd.laba.carina.demo.gui.pages.homework.*;
+import com.solvd.laba.carina.demo.gui.homework.pages.SearchResultPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

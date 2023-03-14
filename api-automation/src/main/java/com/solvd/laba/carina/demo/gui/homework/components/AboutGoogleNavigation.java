@@ -1,9 +1,9 @@
-package com.solvd.laba.carina.demo.gui.components.homework;
+package com.solvd.laba.carina.demo.gui.homework.components;
 
-import com.solvd.laba.carina.demo.gui.pages.homework.CommitmentsPage;
-import com.solvd.laba.carina.demo.gui.pages.homework.InfoPage;
-import com.solvd.laba.carina.demo.gui.pages.homework.ProductPage;
-import com.solvd.laba.carina.demo.gui.pages.homework.StoriesPage;
+import com.solvd.laba.carina.demo.gui.homework.pages.CommitmentsPage;
+import com.solvd.laba.carina.demo.gui.homework.pages.InfoPage;
+import com.solvd.laba.carina.demo.gui.homework.pages.ProductPage;
+import com.solvd.laba.carina.demo.gui.homework.pages.StoriesPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

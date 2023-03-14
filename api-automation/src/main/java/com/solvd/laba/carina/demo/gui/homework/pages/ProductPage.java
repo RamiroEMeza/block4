@@ -1,10 +1,10 @@
-package com.solvd.laba.carina.demo.gui.pages.homework;
+package com.solvd.laba.carina.demo.gui.homework.pages;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
-import com.solvd.laba.carina.demo.gui.components.homework.AboutGoogleNavigation;
+import com.solvd.laba.carina.demo.gui.homework.components.AboutGoogleNavigation;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;

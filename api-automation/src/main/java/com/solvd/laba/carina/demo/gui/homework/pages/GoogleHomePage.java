@@ -1,4 +1,4 @@
-package com.solvd.laba.carina.demo.gui.pages.homework;
+package com.solvd.laba.carina.demo.gui.homework.pages;
 
 import java.lang.invoke.MethodHandles;
 
@@ -16,9 +16,6 @@ import org.testng.Assert;
 public class GoogleHomePage extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @FindBy(xpath = "//form[@action='/search']")
-    private ExtendedWebElement searchForm;
-
     @FindBy(xpath = "//input[@name='q']")
     private ExtendedWebElement searchInput;
 
@@ -28,41 +25,37 @@ public class GoogleHomePage extends AbstractPage {
     @FindBy(xpath = "//form//div[@role='button' and (@aria-label='Delete' or @aria-label='Borrar')]")
     private ExtendedWebElement clearSearchInput;
 
-    @FindBy(xpath = "//a[@class='gb_e']")
-    private ExtendedWebElement googleApps;
-
     @FindBy(xpath = "//a[@class='pHiOh']")
     private ExtendedWebElement aboutGoogle;
+
+    @FindBy(xpath = "//div//a[contains(@href, 'accounts.google')]")
+    private ExtendedWebElement signIn;
 
     public GoogleHomePage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
-        setUiLoadedMarker(searchForm);
+        setUiLoadedMarker(searchInput);
     }
 
     public SearchResultPage search(String subject) {
-        assertElementPresent(searchInput);
         searchInput.type(subject);
-        assertElementPresent(searchButton);
         searchButton.click();
         return new SearchResultPage(driver);
     }
 
     public void writeAndDeleteInput(String subject) {
-        assertElementPresent(searchInput);
         searchInput.type(subject);
-        assertElementPresent(clearSearchInput);
         clearSearchInput.click();
         Assert.assertTrue(searchInput.getText().isEmpty());
     }
 
-    public ExtendedWebElement getGoogleApps() {
-        return googleApps;
-    }
-
     public InfoPage getAboutGoogle() {
-        assertElementPresent(aboutGoogle);
         aboutGoogle.click();
         return new InfoPage(driver);
+    }
+
+    public SignInStepOnePage goToSignIn() {
+        signIn.click();
+        return new SignInStepOnePage(driver);
     }
 }

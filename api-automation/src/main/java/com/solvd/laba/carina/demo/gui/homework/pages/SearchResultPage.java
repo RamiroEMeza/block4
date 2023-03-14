@@ -1,11 +1,11 @@
-package com.solvd.laba.carina.demo.gui.pages.homework;
+package com.solvd.laba.carina.demo.gui.homework.pages;
 
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
-import com.solvd.laba.carina.demo.gui.components.homework.ResultPagesNavigation;
+import com.solvd.laba.carina.demo.gui.homework.components.ResultPagesNavigation;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
