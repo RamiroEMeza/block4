@@ -5,7 +5,6 @@ import com.solvd.laba.carina.demo.gui.pages.homework.*;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.utils.R;
-import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -70,33 +69,39 @@ public class WebTest implements IAbstractTest {
         googleHomePage.open();
         Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
 
-
         SearchResultPage secondPage = googleHomePage.search(R.TESTDATA.get("search_example_one"));
         Assert.assertTrue(secondPage.isPageOpened(), "Page is not opened!");
         secondPage.checkSearch(R.TESTDATA.get("search_example_one"));
-        secondPage.changePage(2);
+
+        SearchResultPage anotherPage = secondPage.changePage(R.TESTDATA.get("change_to_result_page"));
+        Assert.assertTrue(anotherPage.isPageOpened(), "Page is not opened!");
+        anotherPage.checkSearch(R.TESTDATA.get("search_example_one"));
+        anotherPage.checkCorrectPageIsOpen(R.TESTDATA.get("change_to_result_page"));
     }
 
     @Test()
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testGoToProducts() {
+    public void testAboutGoogle() {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
         googleHomePage.open();
         Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
 
         InfoPage infoPage = googleHomePage.getAboutGoogle();
-        infoPage.assertPageOpened();
+        Assert.assertTrue(infoPage.isPageOpened(), "Page is not opened!");
+        infoPage.checkLinks();
 
         ProductPage productPage = infoPage.getAboutGoogleNavigation().openProductPage();
-        productPage.assertPageOpened();
+        Assert.assertTrue(productPage.isPageOpened(), "Page is not opened!");
         productPage.checkGoogleProductsList();
 
         CommitmentsPage commitmentsPage = productPage.getAboutGoogleNavigation().openCommitmentsPage();
-        commitmentsPage.assertPageOpened();
+        Assert.assertTrue(commitmentsPage.isPageOpened(), "Page is not opened!");
+        commitmentsPage.checkReports();
+        commitmentsPage.checkGoogleCommitments();
 
         StoriesPage storiesPage = commitmentsPage.getAboutGoogleNavigation().openStoriesPage();
-        storiesPage.assertPageOpened();
+        Assert.assertTrue(storiesPage.isPageOpened(), "Page is not opened!");
 
         infoPage = storiesPage.getAboutGoogleNavigation().openInfoPage();
 
