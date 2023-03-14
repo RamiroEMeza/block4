@@ -23,11 +23,11 @@ public class SignInSecondStepPage extends AbstractPage {
     public SignInSecondStepPage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
-        setUiLoadedMarker(form);
+        setUiLoadedMarker(nextbButton);
     }
 
     public GoogleHomePage checkIn(String password) {
-        ExtendedWebElement passwordInput = form.findExtendedWebElement(By.xpath("//input[@name='password']"));
+        ExtendedWebElement passwordInput = form.findExtendedWebElement(By.xpath("//input[@type='password']"));
         passwordInput.type(password);
         nextbButton.click();
         return new GoogleHomePage(driver);

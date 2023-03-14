@@ -112,6 +112,8 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(storiesPage.isPageOpened(), "Page is not opened!");
 
         infoPage = storiesPage.getAboutGoogleNavigation().openInfoPage();
+        Assert.assertTrue(infoPage.isPageOpened(), "Page is not opened!");
+        infoPage.checkLinks();
 
     }
 
@@ -127,7 +129,11 @@ public class WebTest implements IAbstractTest {
 
         signInStepOnePage.checkIn(email);
         signInStepOnePage.checkDataProvided(email);
-
+        
+        //Can't interact with the password input to finish the sign in
+//        SignInSecondStepPage signInSecondStepPage = signInStepOnePage.checkIn(email);
+//
+//        GoogleHomePage googleHomePage1 = signInSecondStepPage.checkIn(password);
     }
 
 

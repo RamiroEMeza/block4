@@ -30,6 +30,8 @@ public class SignInStepOnePage extends AbstractPage {
     public void checkIn(String email) {
         ExtendedWebElement emailInput = form.findExtendedWebElement(By.xpath("//input[@name='identifier']"));
         emailInput.type(email);
+//        nextbButton.click();
+//        return new SignInSecondStepPage(driver);
     }
 
     public void checkDataProvided(String email) {
