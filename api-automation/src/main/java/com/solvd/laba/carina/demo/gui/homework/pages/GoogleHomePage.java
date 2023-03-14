@@ -46,7 +46,7 @@ public class GoogleHomePage extends AbstractPage {
     public void writeAndDeleteInput(String subject) {
         searchInput.type(subject);
         clearSearchInput.click();
-        Assert.assertTrue(searchInput.getText().isEmpty());
+        Assert.assertTrue(searchInput.getText().isEmpty(), "Search input is not empty!");
     }
 
     public InfoPage getAboutGoogle() {

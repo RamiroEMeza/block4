@@ -32,8 +32,8 @@ public class ProductPage extends AbstractPage {
     public void checkGoogleProductsList() {
         Assert.assertFalse(googleProductsList.isEmpty());
         googleProductsList.forEach(product -> {
-            product.isClickable();
-            product.isVisible();
+            Assert.assertTrue(product.isClickable(), "Link is not clickable!");
+            Assert.assertTrue(product.isVisible(), "Link is not visible!");
         });
     }
 

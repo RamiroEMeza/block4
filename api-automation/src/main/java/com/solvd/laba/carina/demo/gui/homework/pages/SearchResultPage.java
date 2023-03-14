@@ -60,8 +60,9 @@ public class SearchResultPage extends AbstractPage {
                 descriptionAppearances.getAndIncrement();
             }
         });
-        Assert.assertTrue(titlesAppearances.get() > 0);
-        Assert.assertTrue(descriptionAppearances.get() > 0);
+
+        Assert.assertTrue((titlesAppearances.get() > 0), "0 titles related!");
+        Assert.assertTrue((descriptionAppearances.get() > 0), "0 descriptions related!");
     }
 
     public ResultPagesNavigation getPages() {
@@ -74,7 +75,7 @@ public class SearchResultPage extends AbstractPage {
 
     public void checkCorrectPageIsOpen(String label) {
         ExtendedWebElement check = this.pagesNavigation.checkCorrectPageIsOpen(label);
-        Assert.assertTrue((check == null), "Page is not opened!");
+        Assert.assertTrue((check == null), "Correct page is not opened!");
     }
 
 

@@ -41,8 +41,8 @@ public class CommitmentsPage extends AbstractPage {
     public void checkGoogleCommitments() {
         Assert.assertFalse(googleCommitments.isEmpty());
         googleCommitments.forEach(commitment -> {
-            commitment.isClickable();
-            commitment.isVisible();
+            Assert.assertTrue(commitment.isClickable(), "Link is not clickable!");
+            Assert.assertTrue(commitment.isVisible(), "Link is not visible!");
         });
     }
 

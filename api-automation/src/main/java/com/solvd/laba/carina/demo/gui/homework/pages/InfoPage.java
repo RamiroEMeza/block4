@@ -35,10 +35,10 @@ public class InfoPage extends AbstractPage {
     }
 
     public void checkLinks() {
-        Assert.assertFalse(googleLinks.isEmpty());
+        Assert.assertFalse(googleLinks.isEmpty(), "Info page doesn't have links!");
         googleLinks.forEach(link -> {
-            link.isClickable();
-            link.isVisible();
+            Assert.assertTrue(link.isClickable(), "Link is not clickable!");
+            Assert.assertTrue(link.isVisible(), "Link is not visible!");
         });
     }
 
