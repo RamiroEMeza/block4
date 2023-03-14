@@ -34,7 +34,7 @@ public class WebTest implements IAbstractTest {
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void testDesktopWidth() {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
-        googleHomePage.open();
+        Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
         Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(String.valueOf(googleHomePage.getDevice().getDeviceType()), R.TESTDATA.get("desktop"));
@@ -47,7 +47,7 @@ public class WebTest implements IAbstractTest {
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void writeAndClearSearchInput() {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
-        googleHomePage.open();
+        Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
         Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
         googleHomePage.writeAndDeleteInput(R.TESTDATA.get("search_example_one"));
     }
@@ -129,7 +129,7 @@ public class WebTest implements IAbstractTest {
 
         signInStepOnePage.checkIn(email);
         signInStepOnePage.checkDataProvided(email);
-        
+
         //Can't interact with the password input to finish the sign in
 //        SignInSecondStepPage signInSecondStepPage = signInStepOnePage.checkIn(email);
 //
