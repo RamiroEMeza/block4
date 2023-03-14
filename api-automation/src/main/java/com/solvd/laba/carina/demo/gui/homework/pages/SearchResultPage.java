@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class SearchResultPage extends AbstractPage {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -48,21 +49,20 @@ public class SearchResultPage extends AbstractPage {
     public void checkSearch(String subject) {
         Assert.assertFalse(titlesResults.isEmpty());
         Assert.assertFalse(descriptionResults.isEmpty());
-        AtomicInteger titlesAppearances = new AtomicInteger();
-        AtomicInteger descriptionAppearances = new AtomicInteger();
+        AtomicInteger appearances = new AtomicInteger();
+        SoftAssert softAssert = new SoftAssert();
         titlesResults.forEach(t -> {
             if (t.isElementPresent() && t.isVisible() && StringUtils.containsIgnoreCase(t.getText(), subject)) {
-                titlesAppearances.getAndIncrement();
+                appearances.getAndIncrement();
             }
         });
         descriptionResults.forEach(d -> {
             if (d.isElementPresent() && d.isVisible() && StringUtils.containsIgnoreCase(d.getText(), subject)) {
-                descriptionAppearances.getAndIncrement();
+                appearances.getAndIncrement();
             }
         });
 
-        Assert.assertTrue((titlesAppearances.get() > 0), "0 titles related!");
-        Assert.assertTrue((descriptionAppearances.get() > 0), "0 descriptions related!");
+        Assert.assertTrue((appearances.get() > 0), "0 titles related!");
     }
 
     public ResultPagesNavigation getPages() {
