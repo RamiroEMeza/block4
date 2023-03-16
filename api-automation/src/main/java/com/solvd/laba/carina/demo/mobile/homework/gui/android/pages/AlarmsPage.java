@@ -16,17 +16,16 @@ import java.lang.invoke.MethodHandles;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = AlarmsPageBase.class)
 public class AlarmsPage extends AlarmsPageBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
+    public final String Q_ADD_ALARM = "//android.widget.RadialTimePickerView.RadialPickerTouchHelper[@content-desc=\"VAR\"]";
+
+    public final String Q_CHECK_STORED_ALARM = "//android.widget.TextView[@content-desc=\"HH:MM AM\"]";
+
     @FindBy(xpath = "//rk[@content-desc=\"Alarm\"]")
     private ExtendedWebElement alarmsBtn;
 
     @FindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Add alarm\"]")
     private ExtendedWebElement addAlarmBtn;
-
-    @FindBy(xpath = "//android.widget.RadialTimePickerView.RadialPickerTouchHelper[@content-desc=\"15\"]")
-    private ExtendedWebElement fifteenBtn;
-
-    @FindBy(xpath = "//android.widget.RadialTimePickerView.RadialPickerTouchHelper[@content-desc=\"2\"]")
-    private ExtendedWebElement twoBtn;
 
     @FindBy(id = "android:id/timePicker")
     private ExtendedWebElement timeSelector;
@@ -47,16 +46,14 @@ public class AlarmsPage extends AlarmsPageBase {
     }
 
     public void addAlarm(String hour, String minute) {
-        String q = "//android.widget.RadialTimePickerView.RadialPickerTouchHelper[@content-desc=\"VAR\"]";
         addAlarmBtn.click();
-        timeSelector.findExtendedWebElement(By.xpath(q.replace("VAR", hour))).click();
-        timeSelector.findExtendedWebElement(By.xpath(q.replace("VAR", minute))).click();
+        timeSelector.findExtendedWebElement(By.xpath(Q_ADD_ALARM.replace("VAR", hour))).click();
+        timeSelector.findExtendedWebElement(By.xpath(Q_ADD_ALARM.replace("VAR", minute))).click();
         timeSelector.findExtendedWebElement(By.id("android:id/button1")).click();
     }
 
     public boolean searchStoredAlarm(String hour, String minute) {
-        String control = "//android.widget.TextView[@content-desc=\"HH:MM AM\"]";
-        ExtendedWebElement alarm = storedAlarms.findExtendedWebElement(By.xpath(control.replace("HH", hour).replace("MM", minute)));
+        ExtendedWebElement alarm = storedAlarms.findExtendedWebElement(By.xpath(Q_CHECK_STORED_ALARM.replace("HH", hour).replace("MM", minute)));
         return alarm.isElementPresent();
     }
 
