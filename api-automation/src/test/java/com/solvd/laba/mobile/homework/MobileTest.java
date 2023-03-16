@@ -3,6 +3,7 @@ package com.solvd.laba.mobile.homework;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.AlarmsPageBase;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.ClockPageBase;
 import com.zebrunner.agent.core.annotation.TestLabel;
+import com.zebrunner.carina.utils.R;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,9 +19,11 @@ public class MobileTest implements IAbstractTest, IMobileUtils {
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testCreateAlarm() {
         ClockPageBase clockPage = initPage(getDriver(), ClockPageBase.class);
-        Assert.assertTrue(clockPage.isPageOpened(), "Clock page isn't opened");
+        Assert.assertTrue(clockPage.isPageOpened(), "Clock page isn't opened!");
         AlarmsPageBase alarmsPage = clockPage.goToAlarms();
-        Assert.assertTrue(alarmsPage.isPageOpened(), "Clock page isn't opened");
+        Assert.assertTrue(alarmsPage.isPageOpened(), "Clock page isn't opened!");
+        alarmsPage.addAlarm(R.TESTDATA.get("alarm_hour"), R.TESTDATA.get("alarm_minute"));
+        Assert.assertTrue(alarmsPage.searchStoredAlarm(R.TESTDATA.get("alarm_hour"), R.TESTDATA.get("alarm_minute")), "Alarm was not registered!");
     }
 
 }

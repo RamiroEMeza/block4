@@ -7,4 +7,8 @@ public abstract class AlarmsPageBase extends AbstractPage implements INavigateIn
     public AlarmsPageBase(WebDriver driver) {
         super(driver);
     }
+
+    public abstract void addAlarm(String hour, String minute);
+
+    public abstract boolean searchStoredAlarm(String hour, String minute);
 }
