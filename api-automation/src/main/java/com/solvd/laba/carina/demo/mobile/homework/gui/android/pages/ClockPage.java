@@ -4,6 +4,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.solvd.laba.carina.demo.mobile.homework.gui.android.components.ClockTabs;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.ClockPageBase;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.AlarmsPageBase;
+import com.solvd.laba.carina.demo.mobile.homework.gui.common.StopwatchPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -34,5 +35,10 @@ public class ClockPage extends ClockPageBase {
     @Override
     public ClockPageBase goToClock() {
         return clockTabs.goToClock();
+    }
+
+    @Override
+    public StopwatchPageBase goToStopwatch() {
+        return clockTabs.goToStopwatch();
     }
 }

@@ -4,6 +4,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.solvd.laba.carina.demo.mobile.homework.gui.android.components.ClockTabs;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.AlarmsPageBase;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.ClockPageBase;
+import com.solvd.laba.carina.demo.mobile.homework.gui.common.StopwatchPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,9 +23,6 @@ public class AlarmsPage extends AlarmsPageBase {
 
     @FindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Add alarm\"]")
     private ExtendedWebElement addAlarmBtn;// "+" btn
-
-    @FindBy(id = "android:id/timePicker")
-    private ExtendedWebElement timeSelector;
 
     @FindBy(id = "com.google.android.deskclock:id/tabs")
     private ClockTabs clockTabs;//Nav component
@@ -67,5 +65,10 @@ public class AlarmsPage extends AlarmsPageBase {
     @Override
     public ClockPageBase goToClock() {
         return clockTabs.goToClock();
+    }
+
+    @Override
+    public StopwatchPageBase goToStopwatch() {
+        return clockTabs.goToStopwatch();
     }
 }

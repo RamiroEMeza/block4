@@ -4,8 +4,10 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.solvd.laba.carina.demo.mobile.homework.gui.android.pages.AlarmsPage;
 import com.solvd.laba.carina.demo.mobile.homework.gui.android.pages.ClockPage;
+import com.solvd.laba.carina.demo.mobile.homework.gui.android.pages.StopwatchPage;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.AlarmsPageBase;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.ClockPageBase;
+import com.solvd.laba.carina.demo.mobile.homework.gui.common.StopwatchPageBase;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -35,5 +37,10 @@ public class ClockTabs extends AbstractUIObject {
     public ClockPageBase goToClock() {
         clockBtn.click();
         return new ClockPage(driver);
+    }
+
+    public StopwatchPageBase goToStopwatch() {
+        stopwatchBtn.click();
+        return new StopwatchPage(driver);
     }
 }
