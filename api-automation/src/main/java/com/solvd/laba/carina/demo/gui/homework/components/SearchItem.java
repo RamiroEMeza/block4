@@ -20,10 +20,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SearchItem extends AbstractUIObject {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @FindBy(xpath = "//div[@id='rcnt']//div//a[not(ancestor::div[@class='g'])]/h3")
+    @FindBy(xpath = "//a[not(ancestor::div[@class='g'])]/h3")
     private List<ExtendedWebElement> titlesResults;
 
-    @FindBy(xpath = "//div[@id='rcnt']//div/span//em")
+    @FindBy(xpath = "//div/span//em")
     private List<ExtendedWebElement> descriptionResults;
 
     public SearchItem(WebDriver driver, SearchContext searchContext) {
