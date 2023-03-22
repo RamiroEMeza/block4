@@ -35,7 +35,6 @@ public class WebTest implements IAbstractTest {
     public void testDesktopWidth() {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
         Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
-        Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(String.valueOf(googleHomePage.getDevice().getDeviceType()), R.TESTDATA.get("desktop"));
         softAssert.assertEquals(String.valueOf(getDriver().manage().window().getSize().getWidth() >= R.TESTDATA.getInt("desktop_with")), "true");
@@ -47,7 +46,7 @@ public class WebTest implements IAbstractTest {
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void writeAndClearSearchInput() {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
-        Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
+        googleHomePage.open();
         Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
         googleHomePage.writeAndDeleteInput(R.TESTDATA.get("search_example_one"));
     }
@@ -81,10 +80,11 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(firstSearchResults.isPageOpened(), "Page is not opened!");
         firstSearchResults.checkSearch(R.TESTDATA.get("search_example_one"));
 
-        SearchResultPage secondSearchResults = firstSearchResults.changePage(R.TESTDATA.get("change_to_result_page"));
+        SearchResultPage secondSearchResults;//= firstSearchResults.changePage(R.TESTDATA.get("change_to_result_page"))
+        secondSearchResults = firstSearchResults.getPages().changePage(R.TESTDATA.get("change_to_result_page"));
         Assert.assertTrue(secondSearchResults.isPageOpened(), "Page is not opened!");
         secondSearchResults.checkSearch(R.TESTDATA.get("search_example_one"));
-        secondSearchResults.checkCorrectPageIsOpen(R.TESTDATA.get("change_to_result_page"));
+        Assert.assertTrue((secondSearchResults.getPages().checkCorrectPageIsOpen(R.TESTDATA.get("change_to_result_page")) == null), "Correct page is not opened!");
     }
 
     @Test()

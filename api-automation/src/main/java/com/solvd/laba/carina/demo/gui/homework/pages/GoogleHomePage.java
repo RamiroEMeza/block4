@@ -25,7 +25,7 @@ public class GoogleHomePage extends AbstractPage {
     @FindBy(xpath = "//form//div[@role='button' and (@aria-label='Delete' or @aria-label='Borrar')]")
     private ExtendedWebElement clearSearchInput;
 
-    @FindBy(xpath = "//a[@class='pHiOh']")
+    @FindBy(xpath = "//a[contains(@href, 'about.google')]")
     private ExtendedWebElement aboutGoogle;
 
     @FindBy(xpath = "//div//a[contains(@href, 'accounts.google')]")

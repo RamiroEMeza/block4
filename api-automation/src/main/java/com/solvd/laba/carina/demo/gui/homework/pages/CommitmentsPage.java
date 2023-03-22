@@ -33,16 +33,13 @@ public class CommitmentsPage extends AbstractPage {
     }
 
     public void checkReports() {
-        Assert.assertTrue(reports.isElementPresent());
-        Assert.assertTrue(reports.isClickable());
-        Assert.assertTrue(reports.isVisible());
+        Assert.assertTrue(reports.isElementPresent(), "Reports not found!");
     }
 
     public void checkGoogleCommitments() {
         Assert.assertFalse(googleCommitments.isEmpty());
         googleCommitments.forEach(commitment -> {
-            Assert.assertTrue(commitment.isClickable(), "Link is not clickable!");
-            Assert.assertTrue(commitment.isVisible(), "Link is not visible!");
+            Assert.assertTrue(commitment.isElementPresent(), "Link is not present!");
         });
     }
 

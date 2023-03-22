@@ -37,7 +37,6 @@ public class ResultPagesNavigation extends AbstractUIObject {
     public ExtendedWebElement checkCorrectPageIsOpen(String label) {
         for (ExtendedWebElement resultPageLink : resultPagesLinks) {
             if (resultPageLink.getText().contains(label)) {
-                resultPageLink.click();
                 return resultPageLink;
             }
         }

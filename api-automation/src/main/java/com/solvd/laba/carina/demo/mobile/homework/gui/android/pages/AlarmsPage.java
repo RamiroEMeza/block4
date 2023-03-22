@@ -1,12 +1,12 @@
 package com.solvd.laba.carina.demo.mobile.homework.gui.android.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedFindBy;
 import com.solvd.laba.carina.demo.mobile.homework.gui.android.components.ClockTabs;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.AlarmsPageBase;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.ClockPageBase;
 import com.solvd.laba.carina.demo.mobile.homework.gui.common.StopwatchPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -26,7 +26,6 @@ public class AlarmsPage extends AlarmsPageBase {
 
     @FindBy(id = "com.google.android.deskclock:id/tabs")
     private ClockTabs clockTabs;//Nav component
-
     @FindBy(xpath = "//android.widget.RadialTimePickerView.RadialPickerTouchHelper[@content-desc=\"%s\"]")
     private ExtendedWebElement clockBtn;//clock time selector
 

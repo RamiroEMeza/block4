@@ -50,7 +50,6 @@ public class SearchResultPage extends AbstractPage {
         Assert.assertFalse(titlesResults.isEmpty());
         Assert.assertFalse(descriptionResults.isEmpty());
         AtomicInteger appearances = new AtomicInteger();
-        SoftAssert softAssert = new SoftAssert();
         titlesResults.forEach(t -> {
             if (t.isElementPresent() && t.isVisible() && StringUtils.containsIgnoreCase(t.getText(), subject)) {
                 appearances.getAndIncrement();
@@ -68,15 +67,5 @@ public class SearchResultPage extends AbstractPage {
     public ResultPagesNavigation getPages() {
         return pagesNavigation;
     }
-
-    public SearchResultPage changePage(String label) {
-        return this.pagesNavigation.changePage(label);
-    }
-
-    public void checkCorrectPageIsOpen(String label) {
-        ExtendedWebElement check = this.pagesNavigation.checkCorrectPageIsOpen(label);
-        Assert.assertTrue((check == null), "Correct page is not opened!");
-    }
-
 
 }

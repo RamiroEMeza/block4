@@ -10,8 +10,6 @@ public abstract class StopwatchPageBase extends AbstractPage implements INavigat
 
     public abstract void runStopwatch();
 
-    public abstract void stopStopwatch();
-
     public abstract void resetStopwatch();
 
     public abstract boolean checkIfStopwatchStarted();
