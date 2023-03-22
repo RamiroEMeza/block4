@@ -51,11 +51,11 @@ public class WebTest implements IAbstractTest {
 
         SearchResultPage secondPage = googleHomePage.search(R.TESTDATA.get("search_example_one"));
         Assert.assertTrue(secondPage.isPageOpened(), "Page is not opened!");
-        secondPage.checkSearch(R.TESTDATA.get("search_example_one"));
+        secondPage.getSearchItem().checkSearch(R.TESTDATA.get("search_example_one"));
 
         SearchResultPage thirdPage = secondPage.search(R.TESTDATA.get("search_example_two"));
         Assert.assertTrue(thirdPage.isPageOpened(), "Page is not opened!");
-        thirdPage.checkSearch(R.TESTDATA.get("search_example_two"));
+        thirdPage.getSearchItem().checkSearch(R.TESTDATA.get("search_example_two"));
     }
 
     @Test(dataProvider = "searchChangePage")
@@ -68,11 +68,11 @@ public class WebTest implements IAbstractTest {
 
         SearchResultPage firstSearchResults = googleHomePage.search(search);
         Assert.assertTrue(firstSearchResults.isPageOpened(), "Page is not opened!");
-        firstSearchResults.checkSearch(search);
+        firstSearchResults.getSearchItem().checkSearch(search);
 
         SearchResultPage secondSearchResults = firstSearchResults.getPages().changePage(page);
         Assert.assertTrue(secondSearchResults.isPageOpened(), "Page is not opened!");
-        secondSearchResults.checkSearch(search);
+        secondSearchResults.getSearchItem().checkSearch(search);
         Assert.assertTrue((secondSearchResults.getPages().checkCorrectPageIsOpen(page) == null), "Correct page is not opened!");
     }
 

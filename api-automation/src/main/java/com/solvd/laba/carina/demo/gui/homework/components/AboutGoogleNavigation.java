@@ -18,16 +18,14 @@ import java.lang.invoke.MethodHandles;
 public class AboutGoogleNavigation extends AbstractUIObject {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    public final String PRODUCTS_LINK = "products";
+    public final String COMMITMENTS_LINK = "commitments";
+    public final String STORIES_LINK = "stories";
     @FindBy(xpath = "//a[@data-g-action='home']")
     private ExtendedWebElement info;
-    @FindBy(xpath = "//a[contains(@href, 'products')]")
-    private ExtendedWebElement products;
+    @FindBy(xpath = "//a[contains(@href, '%s')]")
+    private ExtendedWebElement navItem;
 
-    @FindBy(xpath = "//a[contains(@href, 'commitments')]")
-    private ExtendedWebElement commitments;
-
-    @FindBy(xpath = "//a[contains(@href, 'stories')]")
-    private ExtendedWebElement stories;
 
     public AboutGoogleNavigation(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -39,17 +37,17 @@ public class AboutGoogleNavigation extends AbstractUIObject {
     }
 
     public ProductPage openProductPage() {
-        products.click();
+        navItem.format(PRODUCTS_LINK).click();
         return new ProductPage(driver);
     }
 
     public CommitmentsPage openCommitmentsPage() {
-        commitments.click();
+        navItem.format(COMMITMENTS_LINK).click();
         return new CommitmentsPage(driver);
     }
 
     public StoriesPage openStoriesPage() {
-        stories.click();
+        navItem.format(STORIES_LINK).click();
         return new StoriesPage(driver);
     }
 

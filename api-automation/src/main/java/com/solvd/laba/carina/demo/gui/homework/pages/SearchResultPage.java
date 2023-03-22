@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import com.solvd.laba.carina.demo.gui.homework.components.ResultPagesNavigation;
+import com.solvd.laba.carina.demo.gui.homework.components.SearchItem;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -26,11 +27,10 @@ public class SearchResultPage extends AbstractPage {
     @FindBy(xpath = "//button[@type='submit']")
     private ExtendedWebElement searchButton;
 
-    @FindBy(xpath = "//div[@id='rcnt']//div//a[not(ancestor::div[@class='g'])]/h3")
-    private List<ExtendedWebElement> titlesResults;
+    @FindBy(xpath = "//div[@id='search']")
+    private SearchItem searchItem;
 
-    @FindBy(xpath = "//div[@id='rcnt']//div/span//em")
-    private List<ExtendedWebElement> descriptionResults;
+
     @FindBy(xpath = "//div[@id='botstuff']//table")
     private ResultPagesNavigation pagesNavigation;
 
@@ -46,26 +46,12 @@ public class SearchResultPage extends AbstractPage {
         return new SearchResultPage(driver);
     }
 
-    public void checkSearch(String subject) {
-        Assert.assertFalse(titlesResults.isEmpty());
-        Assert.assertFalse(descriptionResults.isEmpty());
-        AtomicInteger appearances = new AtomicInteger();
-        titlesResults.forEach(t -> {
-            if (t.isElementPresent() && t.isVisible() && StringUtils.containsIgnoreCase(t.getText(), subject)) {
-                appearances.getAndIncrement();
-            }
-        });
-        descriptionResults.forEach(d -> {
-            if (d.isElementPresent() && d.isVisible() && StringUtils.containsIgnoreCase(d.getText(), subject)) {
-                appearances.getAndIncrement();
-            }
-        });
-
-        Assert.assertTrue((appearances.get() > 0), "0 titles related!");
-    }
 
     public ResultPagesNavigation getPages() {
         return pagesNavigation;
     }
 
+    public SearchItem getSearchItem() {
+        return searchItem;
+    }
 }
