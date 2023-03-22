@@ -22,27 +22,17 @@ import java.lang.invoke.MethodHandles;
 public class WebTest implements IAbstractTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @DataProvider(name = "CheckInData")
+    @DataProvider(name = "searchChangePage")
     public static Object[][] dataprovider() {
         return new Object[][]{
-                {"testcheckin2023@gmail.com", "chairdesk56"},
+                {"Alone Again", "2"},
+                {"Hotel california", "3"},
+                {"colombia", "4"}
         };
     }
 
     @Test()
-    @MethodOwner(owner = "qpsdemo")
-    @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testDesktopWidth() {
-        GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
-        Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(String.valueOf(googleHomePage.getDevice().getDeviceType()), R.TESTDATA.get("desktop"));
-        softAssert.assertEquals(String.valueOf(getDriver().manage().window().getSize().getWidth() >= R.TESTDATA.getInt("desktop_with")), "true");
-        softAssert.assertAll();
-    }
-
-    @Test()
-    @MethodOwner(owner = "qpsdemo")
+    @MethodOwner(owner = "ramiroMeza")
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void writeAndClearSearchInput() {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
@@ -52,7 +42,7 @@ public class WebTest implements IAbstractTest {
     }
 
     @Test()
-    @MethodOwner(owner = "qpsdemo")
+    @MethodOwner(owner = "ramiroMeza")
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void testSearch() {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
@@ -68,27 +58,26 @@ public class WebTest implements IAbstractTest {
         thirdPage.checkSearch(R.TESTDATA.get("search_example_two"));
     }
 
-    @Test()
-    @MethodOwner(owner = "qpsdemo")
+    @Test(dataProvider = "searchChangePage")
+    @MethodOwner(owner = "ramiroMeza")
     @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testSearchAndChangePage() {
+    public void testSearchAndChangePage(String search, String page) {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
         googleHomePage.open();
         Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
 
-        SearchResultPage firstSearchResults = googleHomePage.search(R.TESTDATA.get("search_example_one"));
+        SearchResultPage firstSearchResults = googleHomePage.search(search);
         Assert.assertTrue(firstSearchResults.isPageOpened(), "Page is not opened!");
-        firstSearchResults.checkSearch(R.TESTDATA.get("search_example_one"));
+        firstSearchResults.checkSearch(search);
 
-        SearchResultPage secondSearchResults;//= firstSearchResults.changePage(R.TESTDATA.get("change_to_result_page"))
-        secondSearchResults = firstSearchResults.getPages().changePage(R.TESTDATA.get("change_to_result_page"));
+        SearchResultPage secondSearchResults = firstSearchResults.getPages().changePage(page);
         Assert.assertTrue(secondSearchResults.isPageOpened(), "Page is not opened!");
-        secondSearchResults.checkSearch(R.TESTDATA.get("search_example_one"));
-        Assert.assertTrue((secondSearchResults.getPages().checkCorrectPageIsOpen(R.TESTDATA.get("change_to_result_page")) == null), "Correct page is not opened!");
+        secondSearchResults.checkSearch(search);
+        Assert.assertTrue((secondSearchResults.getPages().checkCorrectPageIsOpen(page) == null), "Correct page is not opened!");
     }
 
     @Test()
-    @MethodOwner(owner = "qpsdemo")
+    @MethodOwner(owner = "ramiroMeza")
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void testAboutGoogle() {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
@@ -117,23 +106,20 @@ public class WebTest implements IAbstractTest {
 
     }
 
-    @Test(dataProvider = "CheckInData")
-    @MethodOwner(owner = "qpsdemo")
+    @Test()
+    @MethodOwner(owner = "ramiroMeza")
     @TestLabel(name = "feature", value = {"web", "acceptance"})
-    public void testCheckIn(String email, String password) {
+    public void testGoToFaq() {
         GoogleHomePage googleHomePage = new GoogleHomePage(getDriver());
         googleHomePage.open();
         Assert.assertTrue(googleHomePage.isPageOpened(), "Page is not opened!");
 
-        SignInStepOnePage signInStepOnePage = googleHomePage.goToSignIn();
+        TermsPolicyPage termsPolicyPage = googleHomePage.goToTermsPolicy();
+        Assert.assertTrue(termsPolicyPage.isPageOpened(), "Page is not opened!");
 
-        signInStepOnePage.checkIn(email);
-        signInStepOnePage.checkDataProvided(email);
-
-        //Can't interact with the password input to finish the sign in
-//        SignInSecondStepPage signInSecondStepPage = signInStepOnePage.checkIn(email);
-//
-//        GoogleHomePage googleHomePage1 = signInSecondStepPage.checkIn(password);
+        FaqPolicyPage faqPolicyPage = termsPolicyPage.getPoliciesNavigation().openFaq();
+        Assert.assertTrue(faqPolicyPage.isPageOpened(), "Page is not opened!");
+        Assert.assertTrue(faqPolicyPage.checkTextsDisplayed(), "Text is not displayed!");
     }
 
 

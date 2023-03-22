@@ -28,8 +28,8 @@ public class GoogleHomePage extends AbstractPage {
     @FindBy(xpath = "//a[contains(@href, 'about.google')]")
     private ExtendedWebElement aboutGoogle;
 
-    @FindBy(xpath = "//div//a[contains(@href, 'accounts.google')]")
-    private ExtendedWebElement signIn;
+    @FindBy(xpath = "//a[contains(@href, 'terms')]")
+    private ExtendedWebElement termsPolicy;
 
     public GoogleHomePage(WebDriver driver) {
         super(driver);
@@ -54,8 +54,8 @@ public class GoogleHomePage extends AbstractPage {
         return new InfoPage(driver);
     }
 
-    public SignInStepOnePage goToSignIn() {
-        signIn.click();
-        return new SignInStepOnePage(driver);
+    public TermsPolicyPage goToTermsPolicy() {
+        termsPolicy.click();
+        return new TermsPolicyPage(driver);
     }
 }
